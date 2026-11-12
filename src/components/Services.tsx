@@ -1,7 +1,7 @@
 "use client";
 
 import { dictionary, Language } from "@/lib/content";
-import { Briefcase, Handshake, TrendingUp, Users, CheckCircle2 } from "lucide-react";
+import { TrendingUp, Handshake, Users, CheckCircle2 } from "lucide-react";
 
 interface ServicesProps {
   lang: Language;
@@ -10,85 +10,93 @@ interface ServicesProps {
 export default function Services({ lang }: ServicesProps) {
   const t = dictionary[lang];
   const isAr = lang === "ar";
-
   const icons = [TrendingUp, Handshake, Users];
+  const accentColors = [
+    "from-blue-600/20 to-blue-800/20 border-blue-500/20",
+    "from-gold-600/20 to-gold-800/20 border-gold-500/30",
+    "from-emerald-600/20 to-emerald-800/20 border-emerald-500/20",
+  ];
+  const iconColors = [
+    "bg-blue-900 text-blue-300",
+    "bg-gradient-to-br from-gold-700 to-gold-900 text-gold-300",
+    "bg-emerald-900 text-emerald-300",
+  ];
 
   return (
-    <section id="services" className="py-20 md:py-28 bg-navy-50/70 text-navy-950 border-y border-navy-100">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
-        <div className="max-w-3xl mx-auto text-center mb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-navy-200 text-navy-800 text-xs font-bold uppercase tracking-wider mb-4 shadow-sm">
-            <Briefcase className="w-4 h-4 text-gold-600" />
-            <span>{t.services.tag}</span>
+    <section id="services" className="py-24 md:py-32 bg-navy-950 text-white relative overflow-hidden">
+      {/* Background effects */}
+      <div className="absolute inset-0 bg-[radial-gradient(#c8a96d_1px,transparent_1px)] [background-size:28px_28px] opacity-5 pointer-events-none"></div>
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gold-500/30 to-transparent"></div>
+      <div className="absolute top-0 right-0 w-96 h-96 bg-gold-500/5 rounded-full blur-3xl pointer-events-none"></div>
+      <div className="absolute bottom-0 left-0 w-80 h-80 bg-navy-800/40 rounded-full blur-3xl pointer-events-none"></div>
+
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Header */}
+        <div className="max-w-2xl mx-auto text-center mb-16">
+          <div className="flex items-center justify-center gap-3 mb-5">
+            <div className="section-line"></div>
+            <span className="text-xs font-bold text-gold-500 uppercase tracking-[0.2em]">
+              {t.services.tag}
+            </span>
+            <div className="section-line"></div>
           </div>
 
-          <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-navy-950 mb-4">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight mb-5 leading-tight">
             {t.services.title}
           </h2>
-
-          <p className="text-base sm:text-lg text-navy-600 leading-relaxed">
+          <p className="text-navy-300 text-base leading-relaxed">
             {t.services.subtitle}
           </p>
         </div>
 
-        {/* 3 Services Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {/* Service Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
           {t.services.items.map((item, idx) => {
-            const Icon = icons[idx] || Briefcase;
+            const Icon = icons[idx];
             return (
               <div
                 key={idx}
-                className="group relative bg-white rounded-2xl p-8 shadow-sm hover:shadow-xl border border-navy-100 hover:border-gold-300 transition-all duration-300 flex flex-col justify-between"
+                className={`group relative bg-gradient-to-br ${accentColors[idx]} border rounded-2xl p-8 backdrop-blur-sm hover:scale-[1.02] transition-all duration-300 cursor-default flex flex-col`}
               >
-                <div>
-                  {/* Top Bar with Number and Icon */}
-                  <div className="flex items-center justify-between mb-6">
-                    <span className="text-3xl font-black text-navy-200 group-hover:text-gold-500/50 transition-colors">
-                      {item.num}
-                    </span>
-                    <div className="w-12 h-12 rounded-xl bg-navy-900 text-gold-400 flex items-center justify-center shadow-md group-hover:bg-gold-500 group-hover:text-navy-950 transition-all">
-                      <Icon className="w-6 h-6" />
-                    </div>
-                  </div>
+                {/* Number watermark */}
+                <span className="absolute top-6 right-6 text-7xl font-black text-white/5 leading-none select-none group-hover:text-white/8 transition-colors">
+                  {item.num}
+                </span>
 
-                  {/* Title */}
-                  <h3 className="text-xl font-bold text-navy-950 mb-4 group-hover:text-navy-900 leading-snug">
-                    {item.title}
-                  </h3>
-
-                  {/* Description */}
-                  <p className="text-sm text-navy-600 leading-relaxed mb-6">
-                    {item.desc}
-                  </p>
+                {/* Icon */}
+                <div className={`w-14 h-14 rounded-2xl ${iconColors[idx]} flex items-center justify-center mb-6 shadow-lg flex-shrink-0`}>
+                  <Icon className="w-7 h-7" />
                 </div>
 
-                {/* Key Points list */}
-                <div className="pt-6 border-t border-navy-100">
-                  <ul className="space-y-2.5">
-                    {item.points.map((pt, pIdx) => (
-                      <li
-                        key={pIdx}
-                        className="flex items-start gap-2 text-xs font-medium text-navy-700"
-                      >
-                        <CheckCircle2 className="w-4 h-4 text-gold-600 flex-shrink-0 mt-0.5" />
-                        <span>{pt}</span>
-                      </li>
-                    ))}
-                  </ul>
+                {/* Content */}
+                <h3 className="text-lg font-bold text-white mb-4 leading-snug relative z-10">
+                  {item.title}
+                </h3>
+                <p className="text-sm text-navy-200/80 leading-relaxed mb-6 relative z-10 flex-1">
+                  {item.desc}
+                </p>
+
+                {/* Points */}
+                <div className="pt-5 border-t border-white/10 space-y-2.5">
+                  {item.points.map((pt, pIdx) => (
+                    <div key={pIdx} className="flex items-start gap-2.5">
+                      <CheckCircle2 className="w-4 h-4 text-gold-500 flex-shrink-0 mt-0.5" />
+                      <span className="text-xs text-navy-200 leading-relaxed">{pt}</span>
+                    </div>
+                  ))}
                 </div>
               </div>
             );
           })}
         </div>
 
-        {/* Framing notice */}
-        <div className="mt-12 text-center max-w-2xl mx-auto">
-          <p className="text-xs text-navy-500 italic">
+        {/* Legal notice */}
+        <div className="text-center max-w-2xl mx-auto">
+          <div className="inline-block px-5 py-3 rounded-xl glass-card text-xs text-navy-300 italic">
             {isAr
-              ? "ملاحظة: تقدم هذه الخدمات كأنشطة مهنية في إطار مهام مسؤول الأعمال والشراكات طبقا للأحكام القانونية المعتمدة للمقاول الذاتي."
-              : "Note : Ces prestations s'inscrivent dans le cadre des activités professionnelles de chargé d'affaires et de partenariat, conformément au statut d'auto-entrepreneur."}
-          </p>
+              ? "ملاحظة: تقدم هذه الأنشطة ضمن الإطار القانوني لصفة المقاول الذاتي المعترف بها في الجزائر."
+              : "Note : Ces activités s'exercent dans le cadre légal du statut d'auto-entrepreneur reconnu en Algérie."}
+          </div>
         </div>
       </div>
     </section>
