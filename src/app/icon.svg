@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <linearGradient id="navyBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b1f3a" />
+      <stop offset="100%" stop-color="#061326" />
+    </linearGradient>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f4eedf" />
+      <stop offset="50%" stop-color="#c8a96d" />
+      <stop offset="100%" stop-color="#987233" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Outer Rounded Square -->
+  <rect width="512" height="512" rx="112" fill="url(#navyBg)" />
+  <rect x="24" y="24" width="464" height="464" rx="92" fill="none" stroke="url(#goldGrad)" stroke-width="8" opacity="0.4" />
+  
+  <!-- Inner Elegant Border Frame -->
+  <circle cx="256" cy="256" r="180" fill="none" stroke="url(#goldGrad)" stroke-width="6" opacity="0.8" />
+  <circle cx="256" cy="256" r="195" fill="none" stroke="url(#goldGrad)" stroke-width="2" stroke-dasharray="10 6" opacity="0.6" />
+  
+  <!-- Text Logo Initials BM -->
+  <text x="256" y="295" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="160" font-weight="800" fill="url(#goldGrad)" text-anchor="middle" letter-spacing="4">BM</text>
+  
+  <!-- Subtle Stars / Accent Dots -->
+  <circle cx="256" cy="110" r="7" fill="url(#goldGrad)" />
+  <circle cx="256" cy="402" r="7" fill="url(#goldGrad)" />
+</svg>
